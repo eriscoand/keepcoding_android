@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RestaurAnd</string>
+    <string name="starter_text">Primer plato</string>
+    <string name="main_text">Plato principal</string>
+    <string name="dessert_text">Postre</string>
+    <string name="notdefined_text">Sin definir</string>
+    <string name="gluten_text">Gluten</string>
+    <string name="eggs_text">Huevos</string>
+    <string name="celery_text">Apio</string>
+    <string name="peanuts_text">Cacahuetes</string>
+    <string name="nuts_text">Frutos Secos</string>
+    <string name="milk_text">Lacteos</string>
+    <string name="zombie_text">Zombie</string>
+</resources>
