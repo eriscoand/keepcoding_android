@@ -11,4 +11,7 @@
     <string name="nuts_text">Frutos Secos</string>
     <string name="milk_text">Lacteos</string>
     <string name="zombie_text">Zombie</string>
+    <string name="error_title">Error</string>
+    <string name="error_message">Error loading dishes from server...</string>
+    <string name="error_reload">Reload?</string>
 </resources>

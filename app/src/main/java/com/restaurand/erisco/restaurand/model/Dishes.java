@@ -8,6 +8,16 @@ import java.util.LinkedList;
 
 public class Dishes {
 
+    private static Dishes mInstance;
+
+    public static Dishes getInstance(){
+        return mInstance;
+    }
+
+    public static void setInstance(Dishes mInstance) {
+        Dishes.mInstance = mInstance;
+    }
+
     private LinkedList<Dish> mDishes;
 
     public Dish getDish(int index){

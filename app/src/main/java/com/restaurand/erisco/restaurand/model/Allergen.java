@@ -4,7 +4,9 @@ import android.content.res.Resources;
 
 import com.restaurand.erisco.restaurand.R;
 
-public class Allergen {
+import java.io.Serializable;
+
+public class Allergen implements Serializable {
 
     private String mName;
     private int mIcon;

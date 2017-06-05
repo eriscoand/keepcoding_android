@@ -1,11 +1,9 @@
 package com.restaurand.erisco.restaurand.model;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Dish {
+public class Dish implements Serializable {
 
     private String mName;
     private Course mCourse;

@@ -4,7 +4,9 @@ import android.content.res.Resources;
 
 import com.restaurand.erisco.restaurand.R;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
 
     private String mName;
 
