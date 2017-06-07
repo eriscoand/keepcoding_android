@@ -8,12 +8,12 @@ import java.net.URL;
 
 public class Download {
 
-    public static JSONObject Platos(){
+    public static JSONObject JsonFromUrl(String urlString){
 
         JSONObject jsonRoot = new JSONObject();
 
         try{
-            URL url = new URL("https://ericrisco.com/android/typical_andorra.json");
+            URL url = new URL(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.connect();
 
@@ -24,6 +24,8 @@ public class Download {
             while((downloadBytes = input.read(data))!= -1){
                 sb.append(new String(data,0,downloadBytes));
             }
+
+            jsonRoot = new JSONObject(sb.toString());
 
         }catch (Exception ex){
             ex.printStackTrace();

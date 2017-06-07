@@ -14,4 +14,5 @@
     <string name="error_title">Error</string>
     <string name="error_message">Error loading dishes from server...</string>
     <string name="error_reload">Reload?</string>
+    <string name="platos_json_url">https://ericrisco.com/android/typical_andorra.json</string>
 </resources>

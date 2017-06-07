@@ -1,8 +1,9 @@
 package com.restaurand.erisco.restaurand.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Table {
+public class Table implements Serializable {
 
     private int mNumber;
 

@@ -1,12 +1,14 @@
 package com.restaurand.erisco.restaurand.model;
 
+import java.io.Serializable;
+import java.util.LinkedList;
 
-public class Order {
+public class Order implements Serializable {
 
     private Table mTable;
-    private Dishes mDishes;
+    private LinkedList<Dish> mDishes;
 
-    public Order(Table table, Dishes dishes){
+    public Order(Table table, LinkedList<Dish> dishes){
         mTable = table;
         mDishes = dishes;
     }
@@ -19,11 +21,11 @@ public class Order {
         mTable = table;
     }
 
-    public Dishes getDishes() {
+    public LinkedList<Dish> getDishes() {
         return mDishes;
     }
 
-    public void setDishes(Dishes dishes) {
+    public void setDishes(LinkedList<Dish> dishes) {
         mDishes = dishes;
     }
 }

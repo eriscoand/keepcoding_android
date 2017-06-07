@@ -17,6 +17,8 @@ public class Orders {
     }
 
     public Orders() {
+        mOrders = new LinkedList<>();
+
         LinkedList<Table> tables = Tables.getInstance().getTables();
         for(int i = 0; i < tables.size(); i++){
             Order order = new Order(tables.get(i), null);
@@ -24,7 +26,7 @@ public class Orders {
         }
     }
 
-    public Order getTable(int index){
+    public Order getOrder(int index){
         return mOrders.get(index);
     }
 

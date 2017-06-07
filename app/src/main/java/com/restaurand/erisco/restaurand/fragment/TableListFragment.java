@@ -19,6 +19,7 @@ import com.restaurand.erisco.restaurand.R;
 import com.restaurand.erisco.restaurand.helper.Download;
 import com.restaurand.erisco.restaurand.model.Dish;
 import com.restaurand.erisco.restaurand.model.Dishes;
+import com.restaurand.erisco.restaurand.model.Orders;
 import com.restaurand.erisco.restaurand.model.Table;
 
 import org.json.JSONObject;
@@ -96,10 +97,10 @@ public class TableListFragment extends Fragment {
 
             @Override
             protected Dishes doInBackground(Dish... params) {
-                JSONObject json = Download.Platos();
+                JSONObject json = Download.JsonFromUrl(getString(R.string.platos_json_url));
                 Dishes dishes = new Dishes(json);
                 return dishes;
-            };
+            }
 
             @Override
             protected void onProgressUpdate(Integer... values) {

@@ -3,8 +3,10 @@ package com.restaurand.erisco.restaurand.model;
 import android.content.res.Resources;
 
 import com.restaurand.erisco.restaurand.R;
+import com.restaurand.erisco.restaurand.activity.TablesActivity;
 
 import java.io.Serializable;
+
 
 public class Course implements Serializable {
 
@@ -13,13 +15,13 @@ public class Course implements Serializable {
     public Course(int code) {
         switch(code) {
             case 1:
-                this.mName = Resources.getSystem().getString(R.string.starter_text);
+                this.mName = TablesActivity.getContext().getString(R.string.starter_text);
             case 2:
-                this.mName = Resources.getSystem().getString(R.string.main_text);
+                this.mName = TablesActivity.getContext().getString(R.string.main_text);
             case 3:
-                this.mName = Resources.getSystem().getString(R.string.dessert_text);
+                this.mName = TablesActivity.getContext().getString(R.string.dessert_text);
             default:
-                this.mName = Resources.getSystem().getString(R.string.notdefined_text);
+                this.mName = TablesActivity.getContext().getString(R.string.notdefined_text);
         }
     }
 

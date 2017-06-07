@@ -1,5 +1,8 @@
 package com.restaurand.erisco.restaurand.model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 
@@ -15,6 +18,25 @@ public class Dish implements Serializable {
         this.mCourse = course;
         this.mAllergens = allergens;
         this.mPrice = price;
+    }
+
+    public Dish(JSONObject jsonDish){
+        try{
+            this.mName = jsonDish.getString("nombre");
+            this.mCourse = new Course(jsonDish.getInt("tipo"));
+            this.mPrice = jsonDish.getDouble("precio");
+
+            JSONArray alergenosJSON = jsonDish.getJSONArray("alergenos");
+            LinkedList<Allergen> alergenos = new LinkedList<>();
+
+            for(int i = 0; i < alergenosJSON.length(); i++){
+                Allergen alergeno = new Allergen((int) alergenosJSON.get(i));
+                alergenos.add(alergeno);
+            }
+            this.mAllergens = alergenos;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public String getName() {
