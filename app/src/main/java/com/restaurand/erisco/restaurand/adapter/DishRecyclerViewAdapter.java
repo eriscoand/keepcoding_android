@@ -87,7 +87,7 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
 
                 @Override
                 public void onClick(View v) {
-                    
+
                 }
 
             });

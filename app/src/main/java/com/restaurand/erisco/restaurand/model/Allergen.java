@@ -17,24 +17,31 @@ public class Allergen implements Serializable {
             case 1:
                 this.mName = TablesActivity.getContext().getString(R.string.gluten_text);
                 this.mIcon = R.drawable.gluten;
+                break;
             case 2:
                 this.mName = TablesActivity.getContext().getString(R.string.eggs_text);
                 this.mIcon = R.drawable.huevos;
+                break;
             case 3:
                 this.mName = TablesActivity.getContext().getString(R.string.celery_text);
                 this.mIcon = R.drawable.apio;
+                break;
             case 4:
                 this.mName = TablesActivity.getContext().getString(R.string.peanuts_text);
                 this.mIcon = R.drawable.cacahuetes;
+                break;
             case 5:
                 this.mName = TablesActivity.getContext().getString(R.string.nuts_text);
                 this.mIcon = R.drawable.cascara;
+                break;
             case 6:
                 this.mName = TablesActivity.getContext().getString(R.string.milk_text);
                 this.mIcon = R.drawable.lacteos;
+                break;
             default:
                 this.mName = TablesActivity.getContext().getString(R.string.zombie_text);
                 this.mIcon = R.drawable.zombie;
+                break;
         }
     }
 

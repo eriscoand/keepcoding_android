@@ -16,12 +16,16 @@ public class Course implements Serializable {
         switch(code) {
             case 1:
                 this.mName = TablesActivity.getContext().getString(R.string.starter_text);
+                break;
             case 2:
                 this.mName = TablesActivity.getContext().getString(R.string.main_text);
+                break;
             case 3:
                 this.mName = TablesActivity.getContext().getString(R.string.dessert_text);
+                break;
             default:
                 this.mName = TablesActivity.getContext().getString(R.string.notdefined_text);
+                break;
         }
     }
 

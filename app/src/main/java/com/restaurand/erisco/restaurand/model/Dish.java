@@ -14,16 +14,12 @@ public class Dish implements Serializable {
     private Course mCourse;
     private LinkedList<Allergen> mAllergens;
     private double mPrice;
-    private String added;
-    private int ordered;
 
     public Dish(String name, Course course, LinkedList<Allergen> allergens, double price) {
         this.mName = name;
         this.mCourse = course;
         this.mAllergens = allergens;
         this.mPrice = price;
-        this.added = "";
-        this.ordered = 0;
     }
 
     public Dish(JSONObject jsonDish){
@@ -42,9 +38,6 @@ public class Dish implements Serializable {
                 alergenos.add(alergeno);
             }
             this.mAllergens = alergenos;
-
-            this.added = "";
-            this.ordered = 0;
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -81,22 +74,6 @@ public class Dish implements Serializable {
 
     public void setPrice(double price) {
         mPrice = price;
-    }
-
-    public String getAdded() {
-        return added;
-    }
-
-    public void setAdded(String added) {
-        this.added = added;
-    }
-
-    public int getOrdered() {
-        return ordered;
-    }
-
-    public void setOrdered(int ordered) {
-        this.ordered = ordered;
     }
 
     public String getDescription() {
