@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.restaurand.erisco.restaurand.R;
+import com.restaurand.erisco.restaurand.adapter.DishRecyclerViewAdapter;
+import com.restaurand.erisco.restaurand.model.Dishes;
 import com.restaurand.erisco.restaurand.model.Order;
 import com.restaurand.erisco.restaurand.model.Orders;
 
@@ -57,8 +59,10 @@ public class OrderFragment extends Fragment {
         mList = (RecyclerView) mRoot.findViewById(R.id.dish_list);
         mList.setLayoutManager(new GridLayoutManager(getActivity(),1));
 
+        DishRecyclerViewAdapter adapter = new DishRecyclerViewAdapter();
+        mList.setAdapter(adapter);
+
         return mRoot;
     }
-
 
 }

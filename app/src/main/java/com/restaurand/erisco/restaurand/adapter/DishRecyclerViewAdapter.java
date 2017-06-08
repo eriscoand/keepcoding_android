@@ -5,11 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.restaurand.erisco.restaurand.R;
 import com.restaurand.erisco.restaurand.model.Dish;
+import com.restaurand.erisco.restaurand.model.Dishes;
+
+import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 
@@ -18,9 +22,9 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     private LinkedList<Dish> mDishes;
     private View.OnClickListener mOnClickListener;
 
-    public DishRecyclerViewAdapter(LinkedList<Dish> dishes){
+    public DishRecyclerViewAdapter(){
         super();
-        mDishes = dishes;
+        mDishes = Dishes.getInstance().getDishes();
     }
 
     @Override
@@ -35,7 +39,7 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
 
     @Override
     public void onBindViewHolder(DishViewHolder holder, int position) {
-        holder.bindForecast(mDishes.get(position));
+        holder.bindOrderDish(mDishes.get(position));
     }
 
     @Override
@@ -50,15 +54,43 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     protected class DishViewHolder extends RecyclerView.ViewHolder {
 
         private View mRoot;
+        private TextView mDish_title;
+        private Button mAdd_button;
+        private Button mDel_button;
+        private TextView mDish_number;
 
         public DishViewHolder(View itemView) {
             super(itemView);
-
             mRoot = itemView;
 
+            mDish_title = (TextView) itemView.findViewById(R.id.dish_title);
+            mDish_number = (TextView) itemView.findViewById(R.id.dish_number);
+            mAdd_button = (Button) itemView.findViewById(R.id.add_button);
+            mDel_button = (Button) itemView.findViewById(R.id.del_button);
         }
 
-        public void bindForecast(Dish dish){
+        public void bindOrderDish(Dish dish){
+
+            mDish_title.setText(dish.getName());
+            mDish_number.setText("0");
+
+            mAdd_button.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                }
+
+            });
+
+            mDel_button.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    
+                }
+
+            });
 
 
         }

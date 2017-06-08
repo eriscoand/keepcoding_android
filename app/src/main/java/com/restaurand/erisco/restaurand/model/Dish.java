@@ -9,20 +9,28 @@ import java.util.LinkedList;
 public class Dish implements Serializable {
 
     private String mName;
+    private String mDescription;
+    private String mImage;
     private Course mCourse;
     private LinkedList<Allergen> mAllergens;
     private double mPrice;
+    private String added;
+    private int ordered;
 
     public Dish(String name, Course course, LinkedList<Allergen> allergens, double price) {
         this.mName = name;
         this.mCourse = course;
         this.mAllergens = allergens;
         this.mPrice = price;
+        this.added = "";
+        this.ordered = 0;
     }
 
     public Dish(JSONObject jsonDish){
         try{
             this.mName = jsonDish.getString("nombre");
+            this.mDescription = jsonDish.getString("descripcion");
+            this.mImage = jsonDish.getString("image");
             this.mCourse = new Course(jsonDish.getInt("tipo"));
             this.mPrice = jsonDish.getDouble("precio");
 
@@ -34,6 +42,10 @@ public class Dish implements Serializable {
                 alergenos.add(alergeno);
             }
             this.mAllergens = alergenos;
+
+            this.added = "";
+            this.ordered = 0;
+
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -69,5 +81,37 @@ public class Dish implements Serializable {
 
     public void setPrice(double price) {
         mPrice = price;
+    }
+
+    public String getAdded() {
+        return added;
+    }
+
+    public void setAdded(String added) {
+        this.added = added;
+    }
+
+    public int getOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(int ordered) {
+        this.ordered = ordered;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public String getImage() {
+        return mImage;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
     }
 }

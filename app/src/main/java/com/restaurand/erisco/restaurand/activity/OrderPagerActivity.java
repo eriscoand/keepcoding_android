@@ -2,10 +2,14 @@ package com.restaurand.erisco.restaurand.activity;
 
 
 import android.app.FragmentManager;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.restaurand.erisco.restaurand.R;
 import com.restaurand.erisco.restaurand.fragment.OrderPagerFragment;

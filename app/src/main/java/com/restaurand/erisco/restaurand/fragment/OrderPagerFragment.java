@@ -1,20 +1,29 @@
 package com.restaurand.erisco.restaurand.fragment;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.restaurand.erisco.restaurand.R;
+import com.restaurand.erisco.restaurand.activity.OrderPagerActivity;
 import com.restaurand.erisco.restaurand.adapter.OrderPagerAdapter;
 import com.restaurand.erisco.restaurand.model.Order;
 import com.restaurand.erisco.restaurand.model.Orders;
 import com.restaurand.erisco.restaurand.model.Table;
+import com.restaurand.erisco.restaurand.model.Tables;
 
 public class OrderPagerFragment extends Fragment {
 
@@ -58,10 +67,44 @@ public class OrderPagerFragment extends Fragment {
         mOrders = Orders.getInstance();
         OrderPagerAdapter adapter = new OrderPagerAdapter(getFragmentManager(),mOrders);
 
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+            @Override
+            public void onPageSelected(int position) {
+                updateOrderInfo(position);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         mPager.setAdapter(adapter);
 
         moveToOrder(mInitialOrder);
         updateOrderInfo(mInitialOrder);
+
+        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.trash_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(R.string.sure_message)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) { }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         return root;
     }
@@ -80,5 +123,39 @@ public class OrderPagerFragment extends Fragment {
             }
         }
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_pager, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean superReturn = super.onOptionsItemSelected(item);
+        if(item.getItemId() == R.id.back){
+            moveToOrder(mPager.getCurrentItem() - 1);
+            return true;
+        }else if (item.getItemId() == R.id.next){
+            moveToOrder(mPager.getCurrentItem() + 1);
+            return true;
+        }
+        return superReturn;
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        MenuItem menuPrev = menu.findItem(R.id.back);
+        MenuItem menuNext = menu.findItem(R.id.next);
+
+        menuPrev.setEnabled(mPager.getCurrentItem() > 0);
+        menuNext.setEnabled(mPager.getCurrentItem() < mOrders.getCount() - 1);
+
+    }
+
 
 }

@@ -44,7 +44,7 @@ public class TablesActivity extends AppCompatActivity implements TableListFragme
     }
 
     @Override
-    public void onTableSelected(Table table, int position) {
+    public void onTableSelected(int position) {
 
         FragmentManager fm = getFragmentManager();
         OrderPagerFragment orderFragment = (OrderPagerFragment) fm.findFragmentById(R.id.view_pager_fragment);

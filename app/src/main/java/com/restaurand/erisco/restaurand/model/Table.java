@@ -21,6 +21,7 @@ public class Table implements Serializable {
 
     @Override
     public String toString() {
-        return "Table " + mNumber;
+        int n = mNumber + 1;
+        return "Table " + n;
     }
 }

@@ -17,7 +17,7 @@ public class Tables {
 
     public Tables() {
         mTables = new LinkedList<>();
-        for(int i = 1; i <= 10; i++){
+        for(int i = 0; i < 10; i++){
             mTables.add(new Table(i));
         }
     }
