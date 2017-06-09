@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.restaurand.erisco.restaurand.R;
 import com.restaurand.erisco.restaurand.model.Dish;
 import com.restaurand.erisco.restaurand.model.Dishes;
+import com.restaurand.erisco.restaurand.model.Order;
 
 import org.w3c.dom.Text;
 
@@ -19,12 +20,14 @@ import java.util.LinkedList;
 
 public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerViewAdapter.DishViewHolder>{
 
+    private Order mOrder;
     private LinkedList<Dish> mDishes;
     private View.OnClickListener mOnClickListener;
 
-    public DishRecyclerViewAdapter(){
+    public DishRecyclerViewAdapter(Order order){
         super();
-        mDishes = Dishes.getInstance().getDishes();
+        mOrder = order;
+        mDishes = Dishes.getInstance().dishesInOrder(mOrder);
     }
 
     @Override
@@ -34,12 +37,18 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
 
         view.setOnClickListener(mOnClickListener);
 
+
         return new DishViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(DishViewHolder holder, int position) {
-        holder.bindOrderDish(mDishes.get(position));
+
+        Dish dish = mDishes.get(position);
+        int ordered = mOrder.getDishOrdered().get(dish);
+
+        holder.bindOrderDish(dish, ordered);
+
     }
 
     @Override
@@ -58,6 +67,7 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
         private Button mAdd_button;
         private Button mDel_button;
         private TextView mDish_number;
+        private Dish selectedDish;
 
         public DishViewHolder(View itemView) {
             super(itemView);
@@ -69,16 +79,24 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
             mDel_button = (Button) itemView.findViewById(R.id.del_button);
         }
 
-        public void bindOrderDish(Dish dish){
+        public void newNumberOrdered(int number){
+            mDish_number.setText(String.valueOf(number));
+        }
+
+        public void bindOrderDish(Dish dish, int ordered){
 
             mDish_title.setText(dish.getName());
-            mDish_number.setText("0");
+            newNumberOrdered(ordered);
+            selectedDish = dish;
+
+            mRoot.setBackgroundColor(dish.getCourse().getColor());
 
             mAdd_button.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-
+                    int ordered = mOrder.modifyOrderedNumber(selectedDish,1);
+                    newNumberOrdered(ordered);
                 }
 
             });
@@ -87,13 +105,14 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
 
                 @Override
                 public void onClick(View v) {
-
+                    int ordered = mOrder.modifyOrderedNumber(selectedDish,-1);
+                    newNumberOrdered(ordered);
                 }
 
             });
 
-
         }
+
 
     }
 

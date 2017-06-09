@@ -23,6 +23,10 @@
         <activity android:name=".activity.OrderPagerActivity">
 
         </activity>
+
+        <activity android:name=".activity.DishActivity">
+
+        </activity>
     </application>
 
 </manifest>

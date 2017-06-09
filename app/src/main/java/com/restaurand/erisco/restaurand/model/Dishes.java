@@ -1,9 +1,13 @@
 package com.restaurand.erisco.restaurand.model;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 public class Dishes {
@@ -47,6 +51,12 @@ public class Dishes {
 
     public int getCount(){
         return mDishes.size();
+    }
+
+    public LinkedList<Dish> dishesInOrder(Order order){
+        LinkedList<Dish> dishes = new LinkedList<Dish>(order.getDishOrdered().keySet());
+        Collections.sort(dishes);
+        return dishes;
     }
 
 }

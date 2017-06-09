@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/dish_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="18dp"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        app:srcCompat="@drawable/placeholder"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/intolerance_5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/placeholder"
+        android:layout_alignTop="@+id/intolerance_4"
+        android:layout_toRightOf="@+id/dish_image"
+        android:layout_toEndOf="@+id/dish_image"/>
+
+    <ImageView
+        android:id="@+id/intolerance_4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/intolerance_3"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_toEndOf="@+id/intolerance_3"
+        android:layout_toRightOf="@+id/intolerance_3"
+        app:srcCompat="@drawable/placeholder"/>
+
+    <ImageView
+        android:id="@+id/intolerance_3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:srcCompat="@drawable/placeholder"
+        android:layout_alignTop="@+id/intolerance_2"
+        android:layout_toRightOf="@+id/intolerance_2"
+        android:layout_toEndOf="@+id/intolerance_2"/>
+
+    <TextView
+        android:id="@+id/dish_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:id="@+id/dish_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dish_name"
+        android:layout_marginEnd="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="22dp"
+        android:height="150dp"
+        android:text="TextView"/>
+
+    <ImageView
+        android:id="@+id/intolerance_2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/placeholder"
+        android:layout_alignTop="@+id/intolerance_1"
+        android:layout_toRightOf="@+id/intolerance_1"
+        android:layout_toEndOf="@+id/intolerance_1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"/>
+
+    <ImageView
+        android:id="@+id/intolerance_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/dish_description"
+        android:layout_alignStart="@+id/dish_description"
+        android:layout_below="@+id/dish_description"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/placeholder"/>
+
+
+</RelativeLayout>

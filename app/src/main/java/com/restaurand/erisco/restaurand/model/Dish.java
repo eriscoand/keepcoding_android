@@ -1,12 +1,15 @@
 package com.restaurand.erisco.restaurand.model;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.text.Collator;
 import java.util.LinkedList;
 
-public class Dish implements Serializable {
+public class Dish implements Serializable,Comparable<Dish> {
 
     private String mName;
     private String mDescription;
@@ -91,4 +94,10 @@ public class Dish implements Serializable {
     public void setImage(String image) {
         mImage = image;
     }
+
+    @Override
+    public int compareTo(@NonNull Dish o) {
+        return this.getCourse().getCode() - o.getCourse().getCode();
+    }
 }
+
