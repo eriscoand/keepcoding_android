@@ -100,5 +100,25 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/placeholder"/>
 
+    <TextView
+        android:id="@+id/course_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/dish_description"
+        android:layout_alignRight="@+id/dish_description"
+        android:layout_alignTop="@+id/dish_image"
+        android:layout_marginTop="20dp"
+        android:text="TextView"/>
+
+    <TextView
+        android:id="@+id/price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/course_text"
+        android:layout_alignRight="@+id/course_text"
+        android:layout_below="@+id/course_text"
+        android:layout_marginTop="16dp"
+        android:text="TextView"/>
+
 
 </RelativeLayout>

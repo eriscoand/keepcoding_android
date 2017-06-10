@@ -1,5 +1,6 @@
 package com.restaurand.erisco.restaurand.adapter;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.restaurand.erisco.restaurand.R;
 import com.restaurand.erisco.restaurand.model.Dish;
 import com.restaurand.erisco.restaurand.model.Dishes;
 import com.restaurand.erisco.restaurand.model.Order;
+import com.restaurand.erisco.restaurand.model.Orders;
 
 import org.w3c.dom.Text;
 
@@ -23,11 +25,14 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     private Order mOrder;
     private LinkedList<Dish> mDishes;
     private View.OnClickListener mOnClickListener;
+    private OnReloadingView mOnReloadListener;
+    private Fragment mParentView;
 
-    public DishRecyclerViewAdapter(Order order){
+    public DishRecyclerViewAdapter(Order order, Fragment parentView){
         super();
         mOrder = order;
         mDishes = Dishes.getInstance().dishesInOrder(mOrder);
+        mParentView = parentView; //NOT SURE ABOUT THAT :_D
     }
 
     @Override
@@ -36,8 +41,7 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
                 .inflate(R.layout.content_dish,parent,false);
 
         view.setOnClickListener(mOnClickListener);
-
-
+        mOrder = Orders.getInstance().getOrders().get(mOrder.getTable().getNumber());
         return new DishViewHolder(view);
     }
 
@@ -45,7 +49,9 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     public void onBindViewHolder(DishViewHolder holder, int position) {
 
         Dish dish = mDishes.get(position);
-        int ordered = mOrder.getDishOrdered().get(dish);
+        LinkedList<Order> orders = Orders.getInstance().getOrders();
+        Order order = orders.get(mOrder.getTable().getNumber());
+        int ordered = order.getDishOrdered().get(dish).intValue();
 
         holder.bindOrderDish(dish, ordered);
 
@@ -58,6 +64,10 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         mOnClickListener = onClickListener;
+    }
+
+    public interface OnReloadingView {
+        void onOrderReload(Order order);
     }
 
     protected class DishViewHolder extends RecyclerView.ViewHolder {
@@ -77,16 +87,20 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
             mDish_number = (TextView) itemView.findViewById(R.id.dish_number);
             mAdd_button = (Button) itemView.findViewById(R.id.add_button);
             mDel_button = (Button) itemView.findViewById(R.id.del_button);
+
         }
 
-        public void newNumberOrdered(int number){
+        public void reloadInterface(int number){
+            //No need to refresh all interface to just add or substract one number!
             mDish_number.setText(String.valueOf(number));
         }
 
         public void bindOrderDish(Dish dish, int ordered){
 
+            mOnReloadListener = (OnReloadingView) mParentView;
+
             mDish_title.setText(dish.getName());
-            newNumberOrdered(ordered);
+            reloadInterface(ordered);
             selectedDish = dish;
 
             mRoot.setBackgroundColor(dish.getCourse().getColor());
@@ -96,7 +110,8 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
                 @Override
                 public void onClick(View v) {
                     int ordered = mOrder.modifyOrderedNumber(selectedDish,1);
-                    newNumberOrdered(ordered);
+                    reloadInterface(ordered);
+                    mOnReloadListener.onOrderReload(mOrder);
                 }
 
             });
@@ -106,7 +121,8 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
                 @Override
                 public void onClick(View v) {
                     int ordered = mOrder.modifyOrderedNumber(selectedDish,-1);
-                    newNumberOrdered(ordered);
+                    reloadInterface(ordered);
+                    mOnReloadListener.onOrderReload(mOrder);
                 }
 
             });

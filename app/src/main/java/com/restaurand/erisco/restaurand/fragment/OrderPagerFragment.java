@@ -1,6 +1,7 @@
 package com.restaurand.erisco.restaurand.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,14 +17,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.restaurand.erisco.restaurand.R;
 import com.restaurand.erisco.restaurand.activity.OrderPagerActivity;
+import com.restaurand.erisco.restaurand.adapter.DishRecyclerViewAdapter;
 import com.restaurand.erisco.restaurand.adapter.OrderPagerAdapter;
 import com.restaurand.erisco.restaurand.model.Order;
 import com.restaurand.erisco.restaurand.model.Orders;
 import com.restaurand.erisco.restaurand.model.Table;
 import com.restaurand.erisco.restaurand.model.Tables;
+
+import org.w3c.dom.Text;
 
 public class OrderPagerFragment extends Fragment {
 
@@ -32,7 +37,7 @@ public class OrderPagerFragment extends Fragment {
     private ViewPager mPager;
     private Orders mOrders;
     private int mInitialOrder;
-
+    private Order mSelectedOrder;
 
     public static OrderPagerFragment newInstance(int position){
         OrderPagerFragment fragment = new OrderPagerFragment();
@@ -64,7 +69,16 @@ public class OrderPagerFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_order_pager, container, false);
 
         mPager = (ViewPager) root.findViewById(R.id.view_pager);
+
+        reCreateView(mInitialOrder);
+
+        return root;
+    }
+
+    public void reCreateView(int orderId){
+
         mOrders = Orders.getInstance();
+
         OrderPagerAdapter adapter = new OrderPagerAdapter(getFragmentManager(),mOrders);
 
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -84,29 +98,8 @@ public class OrderPagerFragment extends Fragment {
 
         mPager.setAdapter(adapter);
 
-        moveToOrder(mInitialOrder);
-        updateOrderInfo(mInitialOrder);
-
-        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.trash_button);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(R.string.sure_message)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        })
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) { }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        return root;
+        moveToOrder(orderId);
+        updateOrderInfo(orderId);
     }
 
     public void moveToOrder(int tableIndex){
@@ -114,7 +107,9 @@ public class OrderPagerFragment extends Fragment {
     }
 
     private void updateOrderInfo(int position){
-        Table table = mOrders.getOrder(position).getTable();
+        mSelectedOrder = mOrders.getOrder(position);
+        Table table = mSelectedOrder.getTable();
+
         if(getActivity() instanceof AppCompatActivity){
             AppCompatActivity parentActivity = (AppCompatActivity) getActivity();
             ActionBar toolbar = parentActivity.getSupportActionBar();
@@ -123,7 +118,6 @@ public class OrderPagerFragment extends Fragment {
             }
         }
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -156,6 +150,4 @@ public class OrderPagerFragment extends Fragment {
         menuNext.setEnabled(mPager.getCurrentItem() < mOrders.getCount() - 1);
 
     }
-
-
 }

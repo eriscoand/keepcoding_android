@@ -32,7 +32,7 @@ public class Dishes {
 
             for(int i = 0; i < list.length(); i++){
                 JSONObject jsonDish = list.getJSONObject(i);
-                Dish parsedDish = new Dish(jsonDish);
+                Dish parsedDish = new Dish(jsonDish,i);
                 mDishes.add(parsedDish);
             }
 

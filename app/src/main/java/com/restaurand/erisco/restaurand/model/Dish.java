@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 public class Dish implements Serializable,Comparable<Dish> {
 
+    private int mId;
     private String mName;
     private String mDescription;
     private String mImage;
@@ -25,8 +26,9 @@ public class Dish implements Serializable,Comparable<Dish> {
         this.mPrice = price;
     }
 
-    public Dish(JSONObject jsonDish){
+    public Dish(JSONObject jsonDish, int id){
         try{
+            this.mId = id;
             this.mName = jsonDish.getString("nombre");
             this.mDescription = jsonDish.getString("descripcion");
             this.mImage = jsonDish.getString("image");
@@ -45,6 +47,14 @@ public class Dish implements Serializable,Comparable<Dish> {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
     }
 
     public String getName() {
@@ -75,6 +85,10 @@ public class Dish implements Serializable,Comparable<Dish> {
         return mPrice;
     }
 
+    public String getPriceString() {
+        return String.valueOf(String.format("%.2f", mPrice)) + " €";
+    }
+
     public void setPrice(double price) {
         mPrice = price;
     }
@@ -97,7 +111,7 @@ public class Dish implements Serializable,Comparable<Dish> {
 
     @Override
     public int compareTo(@NonNull Dish o) {
-        return this.getCourse().getCode() - o.getCourse().getCode();
+        return this.mId - o.mId;
     }
 }
 

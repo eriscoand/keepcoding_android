@@ -39,6 +39,7 @@ public class Orders {
     }
 
     public void modifyOrder(Order order){
+        //TODO: Improve?
         LinkedList<Order> orders = Orders.getInstance().getOrders();
         for(int i = 0; i < orders.size(); i++){
             if(order == orders.get(i)){
@@ -46,6 +47,19 @@ public class Orders {
                 break;
             }
         }
+    }
+
+    public Order clearOrder(Order order){
+        //TODO: Improve?
+        LinkedList<Order> orders = Orders.getInstance().getOrders();
+        for(int i = 0; i < orders.size(); i++){
+            if(order == orders.get(i)){
+                order = new Order(order.getTable());
+                Orders.getInstance().getOrders().set(i,order);
+                return order;
+            }
+        }
+        return null;
     }
 
 }
